@@ -1,5 +1,5 @@
-hash: d506023be44349a17b0dff326d1cd026d83af5922fcf24396c6a455455632282
-updated: 2018-12-30T11:38:50.494054413Z
+hash: 5efdaddacf38be94ae8bdc55910848e6e0c22970ab01de871ad748c8d481bf1e
+updated: 2018-12-30T15:37:10.623004956Z
 imports:
 - name: github.com/coreos/etcd
   version: 27fc7e2296f506182f58ce846e48f36b34fe6842
@@ -25,6 +25,8 @@ imports:
   - ptypes/any
   - ptypes/duration
   - ptypes/timestamp
+- name: github.com/hashicorp/golang-lru
+  version: 20f1fb78b0740ba8c3cb143a61e86ba5c8669768
 - name: golang.org/x/net
   version: 66aacef3dd8a676686c7ae3716979581e8b03c47
   subpackages:
