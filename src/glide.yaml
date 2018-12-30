@@ -2,4 +2,4 @@ package: .
 import: 
 - package: github.com/coreos/etcd 
 - package: github.com/hashicorp/golang-lru
-- package: github.com/Cyan4973/xxHash
+- package: github.com/cespare/xxhash 

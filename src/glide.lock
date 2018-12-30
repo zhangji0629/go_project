@@ -1,6 +1,8 @@
-hash: d7e310596e87c7272119d07ecd7b5120b0e68432ff9a02515ecfe443712cdf68
-updated: 2018-12-30T15:57:46.615780214Z
+hash: 432376848763be936d210a69fc3e50b1140cf738758e49c059fd283d12b6c3a1
+updated: 2018-12-30T16:20:04.205145285Z
 imports:
+- name: github.com/cespare/xxhash
+  version: 9573aff1c3fac17fd2632bc44faa33ce808339d2
 - name: github.com/coreos/etcd
   version: 27fc7e2296f506182f58ce846e48f36b34fe6842
   subpackages:
@@ -10,8 +12,6 @@ imports:
   - etcdserver/etcdserverpb
   - mvcc/mvccpb
   - pkg/types
-- name: github.com/Cyan4973/xxHash
-  version: 0f2dd4a1cb103e3fc8c55c855b821eb24c6d82c3
 - name: github.com/gogo/protobuf
   version: 342cbe0a04158f6dcb03ca0079991a51a4248c02
   subpackages:
