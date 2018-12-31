@@ -2,7 +2,7 @@ package lru_cache
 
 import (
 	"errors"
-	"fmt"
+	"lib/singleflight"
 	"time"
 
 	"github.com/cespare/xxhash"
@@ -10,8 +10,9 @@ import (
 )
 
 var (
-	dbs map[byte]*lru.Cache
-	Nil = errors.New("cache:nil")
+	dbs    map[byte]*lru.Cache
+	Nil    = errors.New("cache:nil")
+	gGroup = new(singleflight.Group)
 )
 
 type item struct {
@@ -31,7 +32,7 @@ func init() {
 
 func flush() {
 	i := 0
-	for now := range time.NewTicker(time.Minute).C {
+	for range time.NewTicker(time.Minute).C {
 		shard := byte(i % 256)
 		db, _ := dbs[shard]
 		keys := db.Keys()
@@ -41,7 +42,7 @@ func flush() {
 				getByDb(keyS, db)
 			}
 		}
-		fmt.Printf("FlushKey||time=%s||shard=%d||old=%d||new=%d\n", time.Since(now), shard, len(keys), db.Len())
+		//fmt.Printf("FlushKey||time=%s||shard=%d||old=%d||new=%d\n", time.Since(now), shard, len(keys), db.Len())
 	}
 }
 
@@ -49,13 +50,25 @@ func SetEx(key string, value interface{}, ex time.Duration) error {
 	return setEx(key, value, ex)
 }
 
+func Set(key string, value interface{}) error {
+	return setEx(key, value, time.Hour*24)
+}
+
 func Get(key string) (interface{}, error) {
 	db, _ := dbs[byte(hash(key))]
 	return getByDb(key, db)
 }
 
-func Set(key string, value interface{}) error {
-	return setEx(key, value, time.Hour*24)
+func GetWithFunc(key string, ex time.Duration, fn func() (interface{}, error)) (interface{}, error) {
+	if tmp, _ := Get(key); tmp != nil {
+		return tmp, nil
+	}
+	ret, err := gGroup.Do(key, fn)
+	if err != nil {
+		return nil, err
+	}
+	setEx(key, ret, ex)
+	return ret, nil
 }
 
 func Del(key string) error {
