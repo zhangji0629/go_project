@@ -3,3 +3,4 @@ import:
 - package: github.com/coreos/etcd 
 - package: github.com/hashicorp/golang-lru
 - package: github.com/cespare/xxhash 
+- package: github.com/sirupsen/logrus

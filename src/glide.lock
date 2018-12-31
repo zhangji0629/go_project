@@ -1,5 +1,5 @@
-hash: 432376848763be936d210a69fc3e50b1140cf738758e49c059fd283d12b6c3a1
-updated: 2018-12-30T16:20:04.205145285Z
+hash: c0ac13c64d0c67c72d980cbef26e06dab0e5714df4b154052a6173511d9d402f
+updated: 2018-12-31T09:27:15.221675427Z
 imports:
 - name: github.com/cespare/xxhash
   version: 9573aff1c3fac17fd2632bc44faa33ce808339d2
@@ -29,6 +29,10 @@ imports:
   - ptypes/timestamp
 - name: github.com/hashicorp/golang-lru
   version: 20f1fb78b0740ba8c3cb143a61e86ba5c8669768
+  subpackages:
+  - simplelru
+- name: github.com/sirupsen/logrus
+  version: 91da99df23e3bad7f384338a5a8f636d04093d9a
 - name: golang.org/x/net
   version: 66aacef3dd8a676686c7ae3716979581e8b03c47
   subpackages:
