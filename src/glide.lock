@@ -1,5 +1,5 @@
 hash: c0ac13c64d0c67c72d980cbef26e06dab0e5714df4b154052a6173511d9d402f
-updated: 2018-12-31T09:27:15.221675427Z
+updated: 2019-01-01T12:30:46.838122716Z
 imports:
 - name: github.com/cespare/xxhash
   version: 9573aff1c3fac17fd2632bc44faa33ce808339d2
@@ -31,8 +31,16 @@ imports:
   version: 20f1fb78b0740ba8c3cb143a61e86ba5c8669768
   subpackages:
   - simplelru
+- name: github.com/konsorten/go-windows-terminal-sequences
+  version: 5c8c8bd35d3832f5d134ae1e1e375b69a4d25242
 - name: github.com/sirupsen/logrus
   version: 91da99df23e3bad7f384338a5a8f636d04093d9a
+- name: golang.org/x/crypto
+  version: 9419663f5a44be8b34ca85f08abc5fe1be11f8a3
+  subpackages:
+  - bcrypt
+  - blowfish
+  - ssh/terminal
 - name: golang.org/x/net
   version: 66aacef3dd8a676686c7ae3716979581e8b03c47
   subpackages:
@@ -43,6 +51,11 @@ imports:
   - internal/timeseries
   - lex/httplex
   - trace
+- name: golang.org/x/sys
+  version: ebfc5b4631820b793c9010c87fd8fef0f39eb082
+  subpackages:
+  - unix
+  - windows
 - name: golang.org/x/text
   version: b19bf474d317b857955b12035d2c5acb57ce8b01
   subpackages:

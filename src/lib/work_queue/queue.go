@@ -73,7 +73,7 @@ func (r *WorkQueue) SendTask(fn func()) error {
 func (r *WorkQueue) process(i int) {
 	r.Add(1)
 	defer r.Done()
-	workChan := <-r.workChan
+	workChan := r.workChan[i]
 	defer func() { r.workChan[i] = nil }()
 	for {
 		task, ok := <-workChan
@@ -81,9 +81,9 @@ func (r *WorkQueue) process(i int) {
 			return
 		}
 		fn := func() {
-			CaptureException()
+			defer CaptureException()
 			task()
-		}()
+		}
 		fn()
 	}
 }
@@ -91,7 +91,7 @@ func (r *WorkQueue) process(i int) {
 func (r *WorkQueue) Stop() {
 	r.Lock()
 	defer r.Unlock()
-	r.is_run = false
+	r.isRun = false
 	logrus.Infof("work_queue:%s stopping", r.prefix)
 	for _, workChan := range r.workChan {
 		close(workChan)
