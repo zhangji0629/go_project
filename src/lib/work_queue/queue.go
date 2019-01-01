@@ -2,7 +2,6 @@ package work_queue
 
 import (
 	"errors"
-	"lib/lru_cache"
 	"runtime/debug"
 	"sync"
 	"time"
@@ -63,9 +62,9 @@ func (r *WorkQueue) SendTask(fn func()) error {
 	case r.workChan[shardId] <- fn:
 		return nil
 	default:
-		lru_cache.FreqCall("workqueue:"+r.prefix, time.Second, func() {
-			logrus.Errorf("workqueue:%s shardId:%d fulled", r.prefix, shardId)
-		})
+		logrus.Errorf("workqueue:%s shardId:%d fulled", r.prefix, shardId)
+		/*lru_cache.FreqCall("workqueue:"+r.prefix, time.Second, func() {*/
+		/*})*/
 		return ErrorWorkQueueFulled
 	}
 }

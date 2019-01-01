@@ -7,6 +7,7 @@ import (
 
 	"github.com/cespare/xxhash"
 	lru "github.com/hashicorp/golang-lru"
+	"github.com/sirupsen/logrus"
 )
 
 var (
@@ -42,7 +43,7 @@ func flush() {
 				getByDb(keyS, db)
 			}
 		}
-		//fmt.Printf("FlushKey||time=%s||shard=%d||old=%d||new=%d\n", time.Since(now), shard, len(keys), db.Len())
+		logrus.Infof("FlushKey||time=%s||shard=%d||old=%d||new=%d\n", time.Since(now), shard, len(keys), db.Len())
 	}
 }
 
