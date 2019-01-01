@@ -59,6 +59,13 @@ func Get(key string) (interface{}, error) {
 	return getByDb(key, db)
 }
 
+func FreqCall(key string, ex time.Duration, fn func()) {
+	if value, _ := Get(key); value == nil {
+		setEx(key, 1, ex)
+		fn()
+	}
+}
+
 func GetWithFunc(key string, ex time.Duration, fn func() (interface{}, error)) (interface{}, error) {
 	if tmp, _ := Get(key); tmp != nil {
 		return tmp, nil
